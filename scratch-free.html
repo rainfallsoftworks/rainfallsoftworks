@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scratch Programming – Rainfall Softworks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      line-height: 1.6;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    body.light-mode {
+      background: #f4f4f4;
+      color: #111;
+    }
+
+    body.dark-mode {
+      background: linear-gradient(135deg, #0f0f10, #1a1a2e, #0f0f10);
+      color: white;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      border: 2px solid currentColor;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      z-index: 100;
+      background-color: transparent;
+      color: #111;
+      transition: all 0.3s ease;
+    }
+
+    body.dark-mode .theme-toggle {
+      color: white;
+      border-color: white;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 5rem auto;
+      padding: 1rem;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .image-box {
+      width: 300px;
+      height: 300px;
+      margin: 0 auto 2rem;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .description {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .back-home {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .back-home a {
+      display: inline-block;
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    body.light-mode .back-home a {
+      background: #111;
+      color: white;
+    }
+
+    body.light-mode .back-home a:hover {
+      background: #333;
+    }
+
+    body.dark-mode .back-home a {
+      background: white;
+      color: #111;
+    }
+
+    body.dark-mode .back-home a:hover {
+      background: #ccc;
+    }
+
+    body.dark-mode .image-box {
+      box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body class="light-mode">
+  <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+
+  <div class="container">
+    <div class="header">
+      <h1>Scratch Programming</h1>
+    </div>
+
+    <div class="image-box">
+      <img src="Scratch.png" alt="Scratch Logo" />
+    </div>
+
+    <div class="description">
+      <p>
+        Learn simple block coding through Scratch!
+        A one-time free class that showcases what Scratch is and how Rainfall Softworks teaches classes. 
+        Recommended Age: 7-13. 2 hours in 1 day. Taught live with real-time help. Cost: Free
+      </p>
+    </div>
+
+    <div class="back-home">
+      <a href="index.html">← Back to Home</a>
+    </div>
+  </div>
+
+  <script>
+    // Apply saved theme on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('theme') || 'light';
+      document.body.classList.remove('light-mode', 'dark-mode');
+      document.body.classList.add(`${saved}-mode`);
+    });
+
+    function toggleTheme() {
+      const body = document.body;
+      const isLight = body.classList.contains('light-mode');
+      body.classList.toggle('light-mode', !isLight);
+      body.classList.toggle('dark-mode', isLight);
+      localStorage.setItem('theme', isLight ? 'dark' : 'light');
+    }
+  </script>
+</body>
+</html>
