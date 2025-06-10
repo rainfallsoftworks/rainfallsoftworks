@@ -3,223 +3,86 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rainfall Softworks - Summer Programs</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-light: #f2f2f2;
-      --bg-dark: #0f0f10;
-      --text-light: #111;
-      --text-dark: #fff;
-      --card-bg-light: #fff;
-      --card-bg-dark: #1e1e20;
-      --card-border-light: #000;
-      --card-border-dark: transparent;
-      --accent: linear-gradient(90deg, #f81ce5, #7928ca);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
-
-    body {
-      background: var(--bg-light);
-      color: var(--text-light);
-      transition: background 0.5s, color 0.5s;
-    }
-
-    body.dark {
-      background: var(--bg-dark);
-      color: var(--text-dark);
-    }
-
-    .hero {
-      text-align: center;
-      padding: 6rem 1rem 4rem;
-      background: radial-gradient(circle at top, #eee, #ccc);
-      transition: background 0.5s;
-    }
-
-    body.dark .hero {
-      background: radial-gradient(circle at top, #1a1a2e, #0f0f10);
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-    }
-
-    .hero h1 span {
-      background: var(--accent);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      color: #666;
-      max-width: 600px;
-      margin: 1rem auto 2rem;
-    }
-
-    body.dark .hero p {
-      color: #aaa;
-    }
-
-    .dashboard {
-      display: flex;
-      justify-content: center;
-      margin: 4rem auto;
-      flex-wrap: wrap;
-      gap: 2rem;
-      max-width: 1000px;
-    }
-
-    .card {
-      background: var(--card-bg-light);
-      border: 1px solid var(--card-border-light);
-      padding: 1.5rem;
-      border-radius: 12px;
-      width: 300px;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
-      text-decoration: none;
-      color: inherit;
-      transform: scale(0.95);
-      opacity: 0;
-      animation: fadeInZoom 1s ease forwards;
-    }
-
-    body.dark .card {
-      background: var(--card-bg-dark);
-      border: 1px solid var(--card-border-dark);
-      box-shadow: 0 0 12px rgba(255, 0, 255, 0.1);
-    }
-
-    .card img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-    }
-
-    .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
-    }
-
-    .card h2 {
-      font-size: 1.25rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .card p {
-      color: #555;
-    }
-
-    body.dark .card p {
-      color: #bbb;
-    }
-
-    .toggle-theme {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 0.5rem 1rem;
-      background: #111;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      z-index: 1000;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    body.dark .toggle-theme {
-      background: white;
-      color: black;
-    }
-
-    @keyframes fadeInZoom {
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-  </style>
+  <title>Rainfall Softworks</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <button class="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
-  <section class="hero">
-    <h1><span>Rainfall Softworks</span> Summer Programs</h1>
-    <p>All classes are hosted on Zoom, Discord, and Google Meet. Saturday 12:00 - 14:00 EST is office hours for all classes. Contact us at RainfallSoftworks@gmail.com. For all our classes, you will need a device with a working Zoom, Discord, or Google Meets, and a stable internet connection. Links: <a href="https://discord.gg/yvcNbYpc" target="_blank">Discord Server</a></p>
+<body class="bg-gray-900 text-white font-sans">
+
+  <!-- Navigation Header -->
+  <header class="bg-gray-950 shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-blue-400 hover:text-blue-300 transition-all">Rainfall Softworks</h1>
+      <nav class="hidden md:flex gap-6">
+        <a href="#" class="hover:text-blue-300 transition">Home</a>
+        <a href="#about" class="hover:text-blue-300 transition">About Us</a>
+        <a href="#games" class="hover:text-blue-300 transition">Our Games</a>
+        <a href="#software" class="hover:text-blue-300 transition">Our Software</a>
+        <a href="#classes" class="hover:text-blue-300 transition">Our Classes & Programs</a>
+      </nav>
+      <button id="menu-toggle" class="md:hidden focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
+      <a href="#" class="block hover:text-blue-300">Home</a>
+      <a href="#about" class="block hover:text-blue-300">About Us</a>
+      <a href="#games" class="block hover:text-blue-300">Our Games</a>
+      <a href="#software" class="block hover:text-blue-300">Our Software</a>
+      <a href="#classes" class="block hover:text-blue-300">Our Classes & Programs</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="text-center py-24 px-6 bg-gradient-to-b from-gray-900 to-gray-800">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-5xl font-extrabold mb-4 text-blue-400">Welcome to Rainfall Softworks</h2>
+      <img src="https://via.placeholder.com/800x400" alt="Rainfall Image" class="rounded-lg mx-auto mb-6 shadow-lg" />
+      <p class="text-xl text-gray-300">Rainfall Softworks LLC is a digital entertainment and educational company focused on software and game development, marketing, and program operations.</p>
+    </div>
+    <div class="mt-8">
+      <a href="#classes" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-full transition">Explore Programs</a>
+    </div>
   </section>
 
-  <section class="dashboard">
-    <a class="card" href="basic-java.html">
-      <img src="Processing.png" alt="Basic Java Processing">
-      <h2>Basic Java Processing Programming</h2>
-      <p>Learn Basic OOP Java. 10 hours. Ages 13–18. $150.</p>
-    </a>
-    <a class="card" href="java-month.html">
-      <img src="Processing.png" alt="Java Processing (1 Month)">
-      <h2>Intermediate Java Processing Programming</h2>
-      <p>In-depth OOP course to learn Java. 30 hours. Ages 13–18. $450.</p>
-    </a>
-    <a class="card" href="scratch-free.html">
-      <img src="Scratch.png" alt="Scratch Programming">
-      <h2>Scratch Programming</h2>
-      <p>Intro to block coding. 2 hours. Ages 7–13. Free.</p>
-    </a>
-    <a class="card" href="roblox-basics.html">
-      <img src="RobloxStudio.png" alt="Roblox Studio Basics">
-      <h2>Roblox Studio Basics</h2>
-      <p>Fun Roblox game creation. 5 hours. Ages 7–15. $75.</p>
-    </a>
-    <a class="card" href="roblox-intermediate.html">
-      <img src="RobloxStudio.png" alt="Intermediate Roblox Studio (4 Weeks)">
-      <h2>Intermediate Roblox Studio</h2>
-      <p>Advanced LUA and projects. 40 hours. Ages 10–15. $650.</p>
-    </a>
-    <a class="card" href="html-css.html">
-      <img src="Github.png" alt="HTML & CSS Website Building">
-      <h2>HTML & CSS Website Building</h2>
-      <p>Code and host your own website.</p>
-    </a>
-    <a class="card" href="netbeans-java.html">
-      <img src="Netbeans.jpg" alt="Java NetBeans Programming">
-      <h2>Java NetBeans Programming</h2>
-      <p>Testing</p>
-    </a>
-    <a class="card" href="scratch-jr.html">
-      <img src="https://via.placeholder.com/300x150?text=Scratch+JR" alt="Scratch JR">
-      <h2>Scratch JR</h2>
-      <p>Testing</p>
-    </a>
-    <a class="card" href="python-ai.html">
-      <img src="https://via.placeholder.com/300x150?text=Python+AI" alt="Python AI">
-      <h2>Intro to Python & AI</h2>
-      <p>Explore Python and beginner AI concepts. Age 13–18. $180 total.</p>
-    </a>
+  <!-- About Section -->
+  <section id="about" class="text-center py-16 px-6">
+    <h2 class="text-4xl font-bold text-blue-400 mb-4">About Us</h2>
+    <p class="text-gray-300 max-w-3xl mx-auto mb-6">We inspire creativity through interactive media, software tools, and educational programs, fostering a community of passionate developers and learners.</p>
+    <a href="#contact" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-full transition">Learn More</a>
   </section>
+
+  <!-- Games Section -->
+  <section id="games" class="text-center py-16 px-6 bg-gray-800">
+    <h2 class="text-4xl font-bold text-blue-400 mb-4">Our Games</h2>
+    <p class="text-gray-300 max-w-3xl mx-auto mb-6">We create immersive, story-driven games that spark imagination and connection, blending art, design, and innovation.</p>
+    <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-full transition">View Games</a>
+  </section>
+
+  <!-- Software Section -->
+  <section id="software" class="text-center py-16 px-6">
+    <h2 class="text-4xl font-bold text-blue-400 mb-4">Our Software</h2>
+    <p class="text-gray-300 max-w-3xl mx-auto mb-6">From internal development tools to open-source platforms, we design software that streamlines creativity and collaboration.</p>
+    <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-full transition">Explore Tools</a>
+  </section>
+
+  <!-- Classes Section -->
+  <section id="classes" class="text-center py-16 px-6 bg-gray-800">
+    <h2 class="text-4xl font-bold text-blue-400 mb-4">Our Classes & Programs</h2>
+    <p class="text-gray-300 max-w-3xl mx-auto mb-6">Join our camps and coding workshops, designed to empower the next generation of creators and innovators.</p>
+    <a href="https://rainfallsoftworks.github.io/summer-programs" target="_blank" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-full transition">Visit Program Site</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center text-sm text-gray-500 py-6">
+    &copy; 2025 Rainfall Softworks. All rights reserved.
+  </footer>
 
   <script>
-    const body = document.body;
-    const toggleButton = document.querySelector('.toggle-theme');
-
-    function toggleTheme() {
-      body.classList.toggle('dark');
-      localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
-    }
-
-    // Load saved theme
-    window.addEventListener('DOMContentLoaded', () => {
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'dark') {
-        body.classList.add('dark');
-      }
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
     });
   </script>
 </body>
