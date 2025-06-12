@@ -5,11 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Rainfall Softworks</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .fade {
+      transition: opacity 1s ease-in-out;
+    }
+    .animate-fade-in {
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    .animate-slide-up {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.8s forwards;
+    }
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-scale-in {
+      opacity: 0;
+      transform: scale(0.95);
+      animation: scaleIn 0.6s forwards;
+    }
+    @keyframes scaleIn {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    .carousel-image {
+      opacity: 1;
+      transition: opacity 1s ease, transform 1s ease;
+      border-radius: 0.5rem; /* rounded */
+    }
+    .carousel-image.hidden {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-white font-sans">
+<body class="bg-gray-900 text-white font-sans transition-colors duration-500" id="body">
 
   <!-- Navigation Header -->
-  <header class="bg-gray-950 shadow-lg sticky top-0 z-50">
+  <header id="main-header" class="bg-gray-950 shadow-lg sticky top-0 z-50 animate-slide-up">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
       <h1 class="text-2xl font-bold text-blue-400 hover:text-blue-300 transition-all">Rainfall Softworks</h1>
       <nav class="hidden md:flex gap-6">
@@ -19,14 +62,16 @@
         <a href="#software" class="hover:text-blue-300 transition">Our Software</a>
         <a href="#classes" class="hover:text-blue-300 transition">Our Classes & Programs</a>
       </nav>
-      <button id="menu-toggle" class="md:hidden focus:outline-none">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-      </button>
+      <div class="flex items-center gap-4">
+        <button id="mode-toggle" class="text-white bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded transition-all text-sm">Toggle Mode</button>
+        <button id="menu-toggle" class="md:hidden focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
     </div>
-    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2 animate-fade-in">
       <a href="#" class="block hover:text-blue-300">Home</a>
       <a href="#about" class="block hover:text-blue-300">About Us</a>
       <a href="#games" class="block hover:text-blue-300">Our Games</a>
@@ -36,61 +81,112 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="text-center py-24 px-6 bg-gradient-to-b from-gray-900 to-gray-800">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-5xl font-extrabold mb-4 text-blue-400">Welcome to Rainfall Softworks</h2>
-      <img src="Logo.png" alt="Rainfall Image" class="rounded-lg mx-auto mb-6 shadow-lg" />
-      <p class="text-xl text-gray-300">Rainfall Softworks LLC is a digital entertainment and educational company focused on software and game development, marketing, and program operations.</p>
-    </div>
-    <div class="mt-8">
-      <a href="#classes" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-full transition">Explore Programs</a>
-    </div>
+  <section class="text-center py-16 px-6 bg-gradient-to-b from-gray-900 to-gray-800 animate-fade-in">
+    <h1 class="text-5xl font-extrabold mb-6 text-blue-400">Rainfall Softworks</h1>
+    <p class="text-xl max-w-3xl mx-auto text-gray-300 mb-6">Rainfall Softworks LLC is organized to operate as a digital entertainment and educational company focused on software and game development, marketing, and program operations.</p>
+    <img src="RLogo.png" alt="Showcase" class="mx-auto rounded-lg shadow-lg mb-6">
+    <a href="#about" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full transition">Learn More</a>
   </section>
 
-  <!-- About Section -->
-  <section id="about" class="py-16 px-6 bg-gray-900">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
+  <!-- Main Content -->
+  <main class="p-8 max-w-5xl mx-auto">
+    <section id="about" class="my-12 animate-fade-in flex flex-col md:flex-row items-center gap-8">
       <div class="md:w-1/2">
-        <h2 class="text-4xl font-bold text-blue-400 mb-4">About Us</h2>
-        <p class="text-gray-300 mb-6">We inspire creativity through interactive media, software tools, and educational programs, fostering a community of passionate developers and learners.</p>
-        <a href="#contact" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-full transition">Learn More</a>
+        <h2 class="text-3xl font-bold mb-4 text-center md:text-left">About Us</h2>
+        <p class="mb-4 text-center md:text-left">Rainfall Softworks LLC is organized to operate as a digital entertainment and educational company focused on software and game development, marketing, and program operations.</p>
+        <div class="text-center md:text-left">
+          <button onclick="window.location.href='https://rainfallsoftworks.com'" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">Learn More</button>
+        </div>
       </div>
       <div class="md:w-1/2">
-        <img src="Logo.png" alt="About Us Image" class="rounded-3xl shadow-lg w-full" />
+        <img src="RLogo.png" alt="About Us Image" class="rounded-lg shadow-lg w-full h-auto">
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Games Section -->
-  <section id="games" class="text-center py-16 px-6 bg-gray-800">
-    <h2 class="text-4xl font-bold text-blue-400 mb-4">Our Games</h2>
-    <p class="text-gray-300 max-w-3xl mx-auto mb-6">We create immersive, story-driven games that spark imagination and connection, blending art, design, and innovation.</p>
-    <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-full transition">View Games</a>
-  </section>
+    <section id="games" class="my-12 animate-fade-in text-center">
+      <h2 class="text-3xl font-bold mb-4">Our Games</h2>
+      <p class="mb-4">We design and publish unique digital experiences across multiple platforms.</p>
+      <img id="game-carousel" class="carousel-image w-full h-auto" src="https://via.placeholder.com/800x400?text=Game+1" alt="Game showcase"/>
+      <button onclick="window.location.href='https://rainfallsoftworks.com'" class="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">See Games</button>
+    </section>
 
-  <!-- Software Section -->
-  <section id="software" class="text-center py-16 px-6">
-    <h2 class="text-4xl font-bold text-blue-400 mb-4">Our Software</h2>
-    <p class="text-gray-300 max-w-3xl mx-auto mb-6">From internal development tools to open-source platforms, we design software that streamlines creativity and collaboration.</p>
-    <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-full transition">Explore Tools</a>
-  </section>
+    <section id="software" class="my-12 animate-fade-in text-center">
+      <h2 class="text-3xl font-bold mb-4">Our Software</h2>
+      <p class="mb-4">From tools to frameworks, our software solutions support creative and educational endeavors.</p>
+      <img id="software-carousel" class="carousel-image w-full h-auto" src="https://via.placeholder.com/800x400?text=Tool+1" alt="Software showcase"/>
+      <button onclick="window.location.href='https://rainfallsoftworks.com'" class="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">Explore Tools</button>
+    </section>
 
-  <!-- Classes Section -->
-  <section id="classes" class="text-center py-16 px-6 bg-gray-800">
-    <h2 class="text-4xl font-bold text-blue-400 mb-4">Our Classes & Programs</h2>
-    <p class="text-gray-300 max-w-3xl mx-auto mb-6">Join our camps and coding workshops, designed to empower the next generation of creators and innovators.</p>
-    <a href="https://rainfallsoftworks.github.io/summer-programs" target="_blank" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-full transition">Visit Program Site</a>
-  </section>
+    <section id="classes" class="my-12 animate-fade-in text-center">
+      <h2 class="text-3xl font-bold mb-4">Our Classes & Programs</h2>
+      <p class="mb-4">We offer hands-on learning experiences through seasonal classes and special programs.</p>
+      <button onclick="window.location.href='https://rainfallsoftworks.com'" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">View Programs</button>
+    </section>
+  </main>
 
-  <!-- Footer -->
   <footer class="text-center text-sm text-gray-500 py-6">
-    &copy; 2025 Rainfall Softworks. All rights reserved.
+    &copy; 2025 Rainfall Softworks. All rights reserved.<br>
+    This site is not officially affiliated with Rainfall Softworks LLC, its employees, or its owners.
   </footer>
 
   <script>
     document.getElementById('menu-toggle').addEventListener('click', () => {
       document.getElementById('mobile-menu').classList.toggle('hidden');
     });
+
+    const body = document.getElementById('body');
+    const toggleBtn = document.getElementById('mode-toggle');
+    const header = document.getElementById('main-header');
+
+    toggleBtn.addEventListener('click', () => {
+      const isDark = body.classList.contains('bg-gray-900');
+
+      body.classList.toggle('bg-gray-900', !isDark);
+      body.classList.toggle('text-white', !isDark);
+      body.classList.toggle('bg-white', isDark);
+      body.classList.toggle('text-gray-900', isDark);
+
+      header.classList.toggle('bg-gray-950', !isDark);
+      header.classList.toggle('bg-gray-100', isDark);
+    });
+
+    const gameImages = [
+      'https://via.placeholder.com/800x400?text=Game+1',
+      'https://via.placeholder.com/800x400?text=Game+2',
+      'https://via.placeholder.com/800x400?text=Game+3'
+    ];
+    let gameIndex = 0;
+    const gameCarousel = document.getElementById('game-carousel');
+
+    if (gameCarousel) {
+      setInterval(() => {
+        gameCarousel.classList.add('hidden');
+        setTimeout(() => {
+          gameIndex = (gameIndex + 1) % gameImages.length;
+          gameCarousel.src = gameImages[gameIndex];
+          gameCarousel.classList.remove('hidden');
+        }, 500);
+      }, 3000);
+    }
+
+    const softwareImages = [
+      'https://via.placeholder.com/800x400?text=Tool+1',
+      'https://via.placeholder.com/800x400?text=Tool+2',
+      'https://via.placeholder.com/800x400?text=Tool+3'
+    ];
+    let softwareIndex = 0;
+    const softwareCarousel = document.getElementById('software-carousel');
+
+    if (softwareCarousel) {
+      setInterval(() => {
+        softwareCarousel.classList.add('hidden');
+        setTimeout(() => {
+          softwareIndex = (softwareIndex + 1) % softwareImages.length;
+          softwareCarousel.src = softwareImages[softwareIndex];
+          softwareCarousel.classList.remove('hidden');
+        }, 500);
+      }, 3000);
+    }
   </script>
 </body>
 </html>
