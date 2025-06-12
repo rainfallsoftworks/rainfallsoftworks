@@ -38,15 +38,6 @@
         transform: scale(1);
       }
     }
-    .carousel-image {
-      opacity: 1;
-      transition: opacity 1s ease, transform 1s ease;
-      border-radius: 0.5rem; /* rounded */
-    }
-    .carousel-image.hidden {
-      opacity: 0;
-      transform: scale(0.98);
-    }
   </style>
 </head>
 <body class="bg-gray-900 text-white font-sans transition-colors duration-500" id="body">
@@ -90,7 +81,7 @@
 
   <!-- Main Content -->
   <main class="p-8 max-w-5xl mx-auto">
-    <section id="about" class="my-12 animate-fade-in flex flex-col md:flex-row items-center gap-8">
+    <section id="about" class="my-12 animate-on-scroll flex flex-col md:flex-row items-center gap-8">
       <div class="md:w-1/2">
         <h2 class="text-3xl font-bold mb-4 text-center md:text-left">About Us</h2>
         <p class="mb-4 text-center md:text-left">Rainfall Softworks LLC is organized to operate as a digital entertainment and educational company focused on software and game development, marketing, and program operations.</p>
@@ -103,21 +94,25 @@
       </div>
     </section>
 
-    <section id="games" class="my-12 animate-fade-in text-center">
+    <section id="games" class="my-12 animate-on-scroll text-center">
       <h2 class="text-3xl font-bold mb-4">Our Games</h2>
       <p class="mb-4">We design and publish unique digital experiences across multiple platforms.</p>
-      <img id="game-carousel" class="carousel-image w-full h-auto" src="RLogo.png" alt="Game showcase"/>
+      <div class="aspect-w-16 aspect-h-9 max-w-3xl mx-auto mb-4">
+        <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/YOUR_VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
+      </div>
       <button onclick="window.location.href='https://rainfallsoftworks.com'" class="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">See Games</button>
     </section>
 
-    <section id="software" class="my-12 animate-fade-in text-center">
+    <section id="software" class="my-12 animate-on-scroll text-center">
       <h2 class="text-3xl font-bold mb-4">Our Software</h2>
       <p class="mb-4">From tools to frameworks, our software solutions support creative and educational endeavors.</p>
-      <img id="software-carousel" class="carousel-image w-full h-auto" src="RLogo.png" alt="Software showcase"/>
+      <div class="aspect-w-16 aspect-h-9 max-w-3xl mx-auto mb-4">
+        <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/watch?v=UMIYeIIbzyo" frameborder="0" allowfullscreen></iframe>
+      </div>
       <button onclick="window.location.href='https://rainfallsoftworks.com'" class="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">Explore Tools</button>
     </section>
 
-    <section id="classes" class="my-12 animate-fade-in text-center">
+    <section id="classes" class="my-12 animate-on-scroll text-center">
       <h2 class="text-3xl font-bold mb-4">Our Classes & Programs</h2>
       <p class="mb-4">We offer hands-on learning experiences through seasonal classes and special programs.</p>
       <button onclick="window.location.href='https://rainfallsoftworks.com'" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">View Programs</button>
@@ -130,63 +125,40 @@
   </footer>
 
   <script>
+    // Mobile menu toggle
     document.getElementById('menu-toggle').addEventListener('click', () => {
       document.getElementById('mobile-menu').classList.toggle('hidden');
     });
 
+    // Dark/light mode toggle
     const body = document.getElementById('body');
     const toggleBtn = document.getElementById('mode-toggle');
     const header = document.getElementById('main-header');
 
     toggleBtn.addEventListener('click', () => {
       const isDark = body.classList.contains('bg-gray-900');
-
       body.classList.toggle('bg-gray-900', !isDark);
       body.classList.toggle('text-white', !isDark);
       body.classList.toggle('bg-white', isDark);
       body.classList.toggle('text-gray-900', isDark);
-
       header.classList.toggle('bg-gray-950', !isDark);
       header.classList.toggle('bg-gray-100', isDark);
     });
 
-    const gameImages = [
-      'RLogo.png',
-      'RLogo.png',
-      'RLogo.png'
-    ];
-    let gameIndex = 0;
-    const gameCarousel = document.getElementById('game-carousel');
+    // Scroll-triggered animations
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
 
-    if (gameCarousel) {
-      setInterval(() => {
-        gameCarousel.classList.add('hidden');
-        setTimeout(() => {
-          gameIndex = (gameIndex + 1) % gameImages.length;
-          gameCarousel.src = gameImages[gameIndex];
-          gameCarousel.classList.remove('hidden');
-        }, 500);
-      }, 3000);
-    }
-
-    const softwareImages = [
-      'RLogo.png',
-      'RLogo.png',
-      'RLogo.png'
-    ];
-    let softwareIndex = 0;
-    const softwareCarousel = document.getElementById('software-carousel');
-
-    if (softwareCarousel) {
-      setInterval(() => {
-        softwareCarousel.classList.add('hidden');
-        setTimeout(() => {
-          softwareIndex = (softwareIndex + 1) % softwareImages.length;
-          softwareCarousel.src = softwareImages[softwareIndex];
-          softwareCarousel.classList.remove('hidden');
-        }, 500);
-      }, 3000);
-    }
+    animatedElements.forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
