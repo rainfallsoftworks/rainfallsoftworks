@@ -25,27 +25,13 @@
       opacity: 1 !important;
       transform: translateX(0) translateY(0) !important;
     }
-    .elegant-border {
-      position: relative;
-    }
-    .elegant-border::after {
-      content: "";
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60%;
-      height: 2px;
-      background: linear-gradient(to right, #d4af37, #f5f5dc, #d4af37);
-      border-radius: 1px;
-    }
   </style>
 </head>
 <body class="bg-gray-900 text-white font-sans transition-colors duration-500" id="body">
 
   <header id="main-header" class="bg-gray-950 shadow-lg sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold text-blue-400 hover:text-blue-300 transition-all elegant-border">Rainfall Softworks</h1>
+      <h1 class="text-2xl font-bold text-blue-400 hover:text-blue-300 transition-all">Rainfall Softworks</h1>
       <nav class="hidden md:flex gap-6">
         <a href="#" class="hover:text-blue-300 transition">Home</a>
         <a href="#about" class="hover:text-blue-300 transition">About Us</a>
@@ -72,14 +58,39 @@
   </header>
 
   <section class="text-center py-16 px-6 bg-gradient-to-b from-gray-900 to-gray-800">
-    <h1 class="text-5xl font-extrabold mb-6 text-blue-400 elegant-border">Rainfall Softworks</h1>
+    <h1 class="text-5xl font-extrabold mb-6 text-blue-400">Rainfall Softworks</h1>
     <p class="text-xl max-w-3xl mx-auto text-gray-300 mb-6">Rainfall Softworks LLC is organized to operate as a digital entertainment and educational company focused on software and game development, marketing, and program operations.</p>
     <img src="RLogo.png" alt="Showcase" class="mx-auto rounded-lg shadow-lg mb-6" style="width:300px; height:300px;">
     <a href="#about" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full transition">Learn More</a>
   </section>
 
   <main class="p-8 max-w-5xl mx-auto">
-    <!-- Existing sections remain unchanged -->
+    <section id="about" class="my-12 fade-in scroll-animate">
+      <h2 class="text-3xl font-bold mb-4 text-center">About Us</h2>
+      <p class="text-center mb-4">We operate at the intersection of digital creativity and education. Our company is built to inspire, teach, and entertain through software and interactive media.</p>
+    </section>
+
+    <section id="games" class="my-12 fade-in-left scroll-animate text-center">
+      <h2 class="text-3xl font-bold mb-4">Our Games</h2>
+      <p class="mb-4">We design and publish unique digital experiences across multiple platforms.</p>
+      <div class="w-full aspect-video mb-4">
+        <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Our Games Video" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <section id="software" class="my-12 fade-in-right scroll-animate text-center">
+      <h2 class="text-3xl font-bold mb-4">Our Software</h2>
+      <p class="mb-4">From tools to frameworks, our software solutions support creative and educational endeavors.</p>
+      <div class="w-full aspect-video mb-4">
+        <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Our Software Video" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <section id="classes" class="my-12 fade-in scroll-animate text-center">
+      <h2 class="text-3xl font-bold mb-4">Our Classes & Programs</h2>
+      <p class="mb-4">We offer hands-on learning experiences through seasonal classes and special programs.</p>
+      <a href="https://rainfallsoftworks.com" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">View Programs</a>
+    </section>
   </main>
 
   <footer class="text-center text-sm text-gray-500 py-6">
@@ -88,14 +99,15 @@
   </footer>
 
   <script>
+    // Mobile menu toggle
     document.getElementById('menu-toggle').addEventListener('click', () => {
       document.getElementById('mobile-menu').classList.toggle('hidden');
     });
 
+    // Light/dark mode toggle
     const body = document.getElementById('body');
     const toggleBtn = document.getElementById('mode-toggle');
     const header = document.getElementById('main-header');
-
     toggleBtn.addEventListener('click', () => {
       const isDark = body.classList.contains('bg-gray-900');
       body.classList.toggle('bg-gray-900', !isDark);
@@ -106,19 +118,18 @@
       header.classList.toggle('bg-gray-100', isDark);
     });
 
-    // Scroll animation script
-    const observers = document.querySelectorAll('.scroll-animate');
-    const observer = new IntersectionObserver((entries) => {
+    // Scroll-triggered animations
+    const animatedEls = document.querySelectorAll('.scroll-animate');
+    const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('show');
-          observer.unobserve(entry.target);
+          observer.unobserve(entry.target); // stop watching once shown
         }
       });
-    }, {
-      threshold: 0.1
-    });
-    observers.forEach(el => observer.observe(el));
+    }, { threshold: 0.1 });
+
+    animatedEls.forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
