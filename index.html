@@ -145,7 +145,7 @@
         }
         
         .nav-links a {
-            text-decoration: none;
+            text-decoration: none; /* Remove underline from nav links */
             color: var(--text);
             font-weight: 500;
             font-size: 1.1rem;
@@ -179,19 +179,13 @@
             transform: translateY(0);
         }
         
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transition: width 0.3s ease;
+        /* Remove underline from all links */
+        a {
+            text-decoration: none;
         }
         
-        .nav-links a:hover::after {
-            width: 100%;
+        a:hover {
+            text-decoration: none;
         }
         
         /* Hero Section with Animations */
@@ -201,6 +195,11 @@
             position: relative;
             overflow: hidden;
             width: 100%;
+            background-image: linear-gradient(rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 0.9)), 
+                              url('https://images.unsplash.com/photo-1550439062-609e1531270e?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            border-radius: 0 0 30px 30px;
         }
         
         .hero-content {
@@ -241,7 +240,7 @@
         .hero h2 {
             font-size: 1.8rem;
             font-weight: 500;
-            color: var(--text-secondary);
+            color: var(--text);
             margin-bottom: 30px;
             max-width: 800px;
             transform: translateY(50px);
@@ -281,7 +280,7 @@
             border-radius: 50px;
             font-size: 1.1rem;
             font-weight: 600;
-            text-decoration: none;
+            text-decoration: none; /* Remove underline from buttons */
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
@@ -389,12 +388,25 @@
             align-items: center;
             transform: scale(0.9);
             opacity: 0;
+            position: relative;
+            cursor: pointer;
+            text-decoration: none; /* Remove underline from service cards */
         }
         
         .service-card:hover {
             transform: translateY(-10px) scale(1.02);
             background-color: var(--card-hover);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
         }
         
         .service-icon {
@@ -409,6 +421,8 @@
             font-size: 2rem;
             color: var(--primary);
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 3;
         }
         
         .service-card:hover .service-icon {
@@ -421,12 +435,16 @@
             font-size: 1.8rem;
             margin-bottom: 15px;
             color: var(--text);
+            position: relative;
+            z-index: 3;
         }
         
         .service-card p {
             color: var(--text-secondary);
             margin-bottom: 20px;
             flex-grow: 1;
+            position: relative;
+            z-index: 3;
         }
         
         .service-features {
@@ -435,6 +453,8 @@
             text-align: left;
             width: 100%;
             margin-top: 20px;
+            position: relative;
+            z-index: 3;
         }
         
         .service-features li {
@@ -516,13 +536,6 @@
             transform: translateY(30px);
             opacity: 0;
             transition: transform 1s ease 0.2s, opacity 1s ease 0.2s;
-        }
-        
-        .section-header .btn {
-            margin-top: 20px;
-            transform: translateY(30px);
-            opacity: 0;
-            transition: transform 1s ease 0.4s, opacity 1s ease 0.4s;
         }
         
         /* About Section */
@@ -699,6 +712,7 @@
             transform: translateY(30px);
             opacity: 0;
             transition: transform 1s ease 0.3s, opacity 1s ease 0.3s;
+            text-decoration: none; /* Remove underline from tutorial button */
         }
         
         /* Contact Section */
@@ -869,7 +883,7 @@
         
         .footer-links a {
             color: var(--text-secondary);
-            text-decoration: none;
+            text-decoration: none; /* Remove underline from footer links */
             transition: all 0.3s ease;
             display: block;
         }
@@ -1023,7 +1037,7 @@
                 </a>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
-                    <li><a href="https://rainfallsoftworks.com/services" target="_blank">Services</a></li>
+                    <li><a href="#services">Services</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#tutorials">Tutorials</a></li>
                     <li><a href="#contact">Contact</a></li>
@@ -1045,7 +1059,7 @@
                 </div>
                 
                 <div class="cta-buttons">
-                    <a href="https://rainfallsoftworks.com/services" class="btn btn-primary" target="_blank">
+                    <a href="#services" class="btn btn-primary">
                         <i class="fas fa-laptop-code"></i> Our Services
                     </a>
                     <a href="#contact" class="btn btn-secondary">
@@ -1062,13 +1076,10 @@
             <div class="section-header">
                 <h2>Our Services</h2>
                 <p>We provide diverse educational experiences tailored to young learners</p>
-                <a href="https://rainfallsoftworks.com/services" class="btn btn-secondary" target="_blank">
-                    <i class="fas fa-external-link-alt"></i> View All Services
-                </a>
             </div>
             
             <div class="services-grid">
-                <div class="service-card">
+                <a href="https://rainfallsoftworks.com" target="_blank" class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
@@ -1081,9 +1092,9 @@
                         <li>Skill certification</li>
                         <li>Portfolio development</li>
                     </ul>
-                </div>
+                </a>
                 
-                <div class="service-card">
+                <a href="https://rainfallsoftworks.com" target="_blank" class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-laptop-code"></i>
                     </div>
@@ -1096,9 +1107,9 @@
                         <li>Latest tools & technologies</li>
                         <li>Creative problem-solving</li>
                     </ul>
-                </div>
+                </a>
                 
-                <div class="service-card">
+                <a href="https://rainfallsoftworks.com" target="_blank" class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-campground"></i>
                     </div>
@@ -1111,7 +1122,7 @@
                         <li>Team-building activities</li>
                         <li>Continued learning resources</li>
                     </ul>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -1246,7 +1257,7 @@
                         <h4>Quick Links</h4>
                         <ul class="footer-links">
                             <li><a href="#home">Home</a></li>
-                            <li><a href="https://rainfallsoftworks.com/services" target="_blank">Services</a></li>
+                            <li><a href="#services">Services</a></li>
                             <li><a href="#about">About Us</a></li>
                             <li><a href="#tutorials">Tutorials</a></li>
                             <li><a href="#contact">Contact</a></li>
@@ -1256,10 +1267,10 @@
                     <div class="footer-column">
                         <h4>Our Services</h4>
                         <ul class="footer-links">
-                            <li><a href="https://rainfallsoftworks.com/services" target="_blank">Structured Courses</a></li>
-                            <li><a href="https://rainfallsoftworks.com/services" target="_blank">Tech Workshops</a></li>
-                            <li><a href="https://rainfallsoftworks.com/services" target="_blank">Summer Camps</a></li>
-                            <li><a href="https://rainfallsoftworks.com/tutorials" target="_blank">Online Tutorials</a></li>
+                            <li><a href="https://rainfallsoftworks.com" target="_blank">Structured Courses</a></li>
+                            <li><a href="https://rainfallsoftworks.com" target="_blank">Tech Workshops</a></li>
+                            <li><a href="https://rainfallsoftworks.com" target="_blank">Summer Camps</a></li>
+                            <li><a href="https://rainfallsoftworks.com" target="_blank">Online Tutorials</a></li>
                         </ul>
                     </div>
                     
@@ -1318,7 +1329,7 @@
         const animateOnScroll = () => {
             const elements = document.querySelectorAll(
                 '.hero h1, .hero h2, .hero .hq-badge, .hero .cta-buttons, ' +
-                '.section-header h2, .section-header p, .section-header .btn, ' +
+                '.section-header h2, .section-header p, ' +
                 '.service-card, .about-text h3, .about-text p, .stat-box, ' +
                 '.about-image, .tutorials-section, .tutorial-card, ' +
                 '.tutorial-btn, .contact-container, footer'
@@ -1335,12 +1346,6 @@
                                 entry.target.style.transform = 'scale(1)';
                                 entry.target.style.opacity = '1';
                             }, 100);
-                        }
-                        
-                        if (entry.target.classList.contains('section-header')) {
-                            setTimeout(() => {
-                                entry.target.classList.add('animate-in');
-                            }, 300);
                         }
                         
                         observer.unobserve(entry.target);
