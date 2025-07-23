@@ -25,7 +25,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
         body {
@@ -109,6 +108,12 @@
             margin-right: 10px;
             color: var(--secondary);
             font-size: 2rem;
+            transition: transform 0.5s ease, color 0.5s ease;
+        }
+        
+        .logo:hover i {
+            transform: rotate(360deg);
+            color: var(--accent);
         }
         
         .logo-text {
@@ -204,18 +209,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            animation: fadeInUp 1s ease;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
         
         .hero h1 {
@@ -228,6 +221,9 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: textShine 3s ease infinite;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 1s ease, opacity 1s ease;
         }
         
         @keyframes textShine {
@@ -247,8 +243,26 @@
             font-weight: 500;
             color: var(--text-secondary);
             margin-bottom: 30px;
-            animation: fadeIn 1.5s ease;
             max-width: 800px;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 1s ease 0.2s, opacity 1s ease 0.2s;
+        }
+        
+        .hq-badge {
+            background: linear-gradient(135deg, rgba(255, 212, 59, 0.1), rgba(255, 212, 59, 0.2));
+            color: var(--accent);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(255, 212, 59, 0.3);
+            margin-top: 10px;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 1s ease 0.4s, opacity 1s ease 0.4s;
         }
         
         .cta-buttons {
@@ -257,6 +271,9 @@
             margin-top: 30px;
             flex-wrap: wrap;
             justify-content: center;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 1s ease 0.6s, opacity 1s ease 0.6s;
         }
         
         .btn {
@@ -269,12 +286,33 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            z-index: -1;
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+        }
+        
+        .btn:hover::before {
+            transform: translateX(0);
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: transparent;
             color: white;
             box-shadow: 0 5px 15px rgba(77, 171, 247, 0.3);
+            border: 2px solid var(--primary);
         }
         
         .btn-primary:hover {
@@ -289,8 +327,44 @@
         }
         
         .btn-secondary:hover {
-            background: rgba(77, 171, 247, 0.1);
             transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(77, 171, 247, 0.5);
+            color: white;
+        }
+        
+        /* Animation Classes */
+        .animate-in {
+            transform: translateY(0) !important;
+            opacity: 1 !important;
+        }
+        
+        .slide-left {
+            transform: translateX(100px);
+            opacity: 0;
+            transition: transform 0.8s ease, opacity 0.8s ease;
+        }
+        
+        .slide-right {
+            transform: translateX(-100px);
+            opacity: 0;
+            transition: transform 0.8s ease, opacity 0.8s ease;
+        }
+        
+        .slide-up {
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform 0.8s ease, opacity 0.8s ease;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        
+        .rotate-in {
+            transform: rotate(10deg) scale(0.8);
+            opacity: 0;
+            transition: transform 0.8s ease, opacity 0.8s ease;
         }
         
         /* Services Section */
@@ -313,11 +387,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            animation: fadeInUp 1s ease;
+            transform: scale(0.9);
+            opacity: 0;
         }
         
         .service-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
             background-color: var(--card-hover);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
         }
@@ -333,6 +408,13 @@
             margin-bottom: 25px;
             font-size: 2rem;
             color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover .service-icon {
+            transform: rotate(20deg) scale(1.2);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
         }
         
         .service-card h3 {
@@ -360,6 +442,12 @@
             position: relative;
             margin-bottom: 8px;
             color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+        
+        .service-features li:hover {
+            color: var(--text);
+            transform: translateX(5px);
         }
         
         .service-features li::before {
@@ -368,6 +456,11 @@
             left: 10px;
             color: var(--secondary);
             font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-features li:hover::before {
+            transform: scale(1.3);
         }
         
         /* Section Styling with Animations */
@@ -393,25 +486,26 @@
             position: relative;
             display: inline-block;
             color: var(--text);
-            animation: fadeInUp 0.8s ease;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 1s ease, opacity 1s ease;
         }
         
         .section-header h2::after {
             content: '';
             position: absolute;
-            width: 70px;
+            width: 0;
             height: 4px;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
             border-radius: 2px;
-            animation: lineGrow 1s ease;
+            transition: width 0.8s ease 0.3s;
         }
         
-        @keyframes lineGrow {
-            from { width: 0; }
-            to { width: 70px; }
+        .section-header.animate-in h2::after {
+            width: 70px;
         }
         
         .section-header p {
@@ -419,7 +513,16 @@
             max-width: 700px;
             margin: 20px auto 0;
             font-size: 1.1rem;
-            animation: fadeIn 1s ease;
+            transform: translateY(30px);
+            opacity: 0;
+            transition: transform 1s ease 0.2s, opacity 1s ease 0.2s;
+        }
+        
+        .section-header .btn {
+            margin-top: 20px;
+            transform: translateY(30px);
+            opacity: 0;
+            transition: transform 1s ease 0.4s, opacity 1s ease 0.4s;
         }
         
         /* About Section */
@@ -440,11 +543,17 @@
             font-size: 2rem;
             color: var(--primary);
             margin-bottom: 20px;
+            transform: translateX(-50px);
+            opacity: 0;
+            transition: transform 0.8s ease, opacity 0.8s ease;
         }
         
         .about-text p {
             margin-bottom: 20px;
             color: var(--text-secondary);
+            transform: translateX(-50px);
+            opacity: 0;
+            transition: transform 0.8s ease 0.2s, opacity 0.8s ease 0.2s;
         }
         
         .stats-grid {
@@ -460,6 +569,9 @@
             border-radius: 12px;
             text-align: center;
             border: 1px solid var(--border);
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 0.8s ease, opacity 0.8s ease;
         }
         
         .stat-value {
@@ -467,6 +579,11 @@
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 5px;
+            transition: color 0.5s ease;
+        }
+        
+        .stat-box:hover .stat-value {
+            color: var(--accent);
         }
         
         .stat-label {
@@ -482,162 +599,115 @@
             height: 400px;
             background: linear-gradient(135deg, #4dabf7, #51cf66);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 1.5rem;
             font-weight: 700;
-        }
-        
-        /* Testimonials Section */
-        .testimonials-container {
-            display: flex;
-            gap: 30px;
-            width: 100%;
-            max-width: 1200px;
-            overflow-x: auto;
-            padding: 20px 0;
-            scrollbar-width: none; /* Firefox */
-        }
-        
-        .testimonials-container::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
-        }
-        
-        .testimonial-card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            padding: 30px;
-            min-width: 350px;
-            border: 1px solid var(--border);
-            animation: fadeInUp 1s ease;
-        }
-        
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .testimonial-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-            margin-right: 15px;
-        }
-        
-        .testimonial-info h4 {
-            font-size: 1.3rem;
-            margin-bottom: 5px;
-        }
-        
-        .testimonial-info p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        
-        .testimonial-content {
-            color: var(--text-secondary);
-            font-style: italic;
-            position: relative;
-            padding: 15px;
-        }
-        
-        .testimonial-content::before {
-            content: """;
-            position: absolute;
-            top: -20px;
-            left: -10px;
-            font-size: 5rem;
-            color: rgba(77, 171, 247, 0.1);
-            font-family: Georgia, serif;
-            line-height: 1;
-        }
-        
-        .rating {
-            color: var(--accent);
-            margin-top: 15px;
-        }
-        
-        /* Programs Section */
-        .programs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            width: 100%;
-            max-width: 1200px;
-        }
-        
-        .program-card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            padding: 30px;
             text-align: center;
-            border: 1px solid var(--border);
-            transition: all 0.4s ease;
-            animation: fadeInUp 1s ease;
+            padding: 20px;
+            transform: translateX(50px);
+            opacity: 0;
+            transition: transform 0.8s ease 0.3s, opacity 0.8s ease 0.3s;
         }
         
-        .program-card:hover {
-            transform: translateY(-10px);
-            background-color: var(--card-hover);
+        .ga-hq {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover .ga-hq {
+            transform: scale(1.1);
+        }
+        
+        /* Tutorials Section */
+        .tutorials-section {
+            background: linear-gradient(135deg, rgba(18, 18, 18, 0.9), rgba(30, 30, 30, 0.9));
+            padding: var(--section-gap) 0;
+            width: 100%;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 1s ease, opacity 1s ease;
+        }
+        
+        .tutorial-container {
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .tutorial-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            border: 1px solid var(--border);
+            transform: scale(0.95);
+            opacity: 0;
+        }
+        
+        .tutorial-card:hover {
+            transform: translateY(-10px) scale(1.01);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
         }
         
-        .program-icon {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
+        .video-container {
+            position: relative;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
         }
         
-        .program-card h3 {
-            font-size: 1.5rem;
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .tutorial-content {
+            padding: 25px;
+        }
+        
+        .tutorial-content h3 {
+            font-size: 1.8rem;
             margin-bottom: 15px;
             color: var(--text);
         }
         
-        .program-card p {
+        .tutorial-content p {
             color: var(--text-secondary);
             margin-bottom: 20px;
         }
         
-        .program-features {
-            list-style-type: none;
-            padding-left: 0;
-            text-align: left;
-            margin-top: 20px;
-        }
-        
-        .program-features li {
-            padding: 8px 0 8px 25px;
-            position: relative;
-            margin-bottom: 8px;
+        .tutorial-meta {
+            display: flex;
+            justify-content: space-between;
             color: var(--text-secondary);
+            font-size: 1rem;
         }
         
-        .program-features li::before {
-            content: '•';
-            position: absolute;
-            left: 10px;
-            color: var(--secondary);
+        .tutorial-btn {
+            display: block;
+            margin: 40px auto 0;
+            text-align: center;
+            max-width: 300px;
+            transform: translateY(30px);
+            opacity: 0;
+            transition: transform 1s ease 0.3s, opacity 1s ease 0.3s;
         }
         
         /* Contact Section */
         .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            max-width: 1200px;
+            max-width: 800px;
             width: 100%;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 1s ease, opacity 1s ease;
         }
         
         .contact-info {
@@ -649,33 +719,59 @@
         .contact-card {
             background: linear-gradient(135deg, rgba(77, 171, 247, 0.1), rgba(81, 207, 102, 0.1));
             border-radius: 12px;
-            padding: 25px;
+            padding: 40px;
             border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.5s ease;
+        }
+        
+        .contact-card:hover {
+            transform: rotate(1deg) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
         }
         
         .contact-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
+            font-size: 2rem;
+            margin-bottom: 30px;
             color: var(--text);
+            transition: color 0.5s ease;
+        }
+        
+        .contact-card:hover h3 {
+            color: var(--accent);
         }
         
         .contact-item {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 15px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            transform: translateX(10px);
         }
         
         .contact-item i {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             background: rgba(77, 171, 247, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover i {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            transform: rotate(15deg);
         }
         
         .contact-item .details {
@@ -683,57 +779,15 @@
         }
         
         .contact-item .label {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: var(--text-secondary);
+            margin-bottom: 5px;
         }
         
         .contact-item .value {
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             color: var(--text);
             font-weight: 500;
-        }
-        
-        .contact-form {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border);
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text);
-            font-weight: 500;
-        }
-        
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px 15px;
-            border-radius: 8px;
-            background-color: var(--darker-bg);
-            border: 1px solid var(--border);
-            color: var(--text);
-            font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
         }
         
         /* Footer */
@@ -745,6 +799,9 @@
             border-top: 1px solid var(--border);
             width: 100%;
             margin-top: auto;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 1s ease, opacity 1s ease;
         }
         
         .footer-content {
@@ -780,6 +837,11 @@
             margin-bottom: 20px;
             position: relative;
             padding-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column h4:hover {
+            color: var(--primary);
         }
         
         .footer-column h4::after {
@@ -790,6 +852,11 @@
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             bottom: 0;
             left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .footer-column:hover h4::after {
+            width: 100%;
         }
         
         .footer-links {
@@ -833,7 +900,7 @@
         .footer-social a:hover {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            transform: translateY(-3px);
+            transform: translateY(-3px) rotate(10deg);
         }
         
         .footer-contact-info {
@@ -846,11 +913,21 @@
             display: flex;
             align-items: flex-start;
             gap: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .footer-contact-item:hover {
+            transform: translateX(5px);
         }
         
         .footer-contact-item i {
             color: var(--primary);
             margin-top: 4px;
+            transition: transform 0.3s ease;
+        }
+        
+        .footer-contact-item:hover i {
+            transform: scale(1.3);
         }
         
         .copyright {
@@ -864,8 +941,7 @@
         
         /* Responsive Design */
         @media (max-width: 992px) {
-            .about-content,
-            .contact-container {
+            .about-content {
                 grid-template-columns: 1fr;
             }
             
@@ -893,10 +969,6 @@
             
             .section-header h2 {
                 font-size: 2rem;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
             }
             
             .stats-grid {
@@ -929,6 +1001,11 @@
                 flex-direction: column;
                 align-items: center;
             }
+            
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -946,9 +1023,9 @@
                 </a>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#services">Services</a></li>
+                    <li><a href="https://rainfallsoftworks.com/services" target="_blank">Services</a></li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="#programs">Programs</a></li>
+                    <li><a href="#tutorials">Tutorials</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -962,9 +1039,14 @@
                 <h1>Rainfall Softworks</h1>
                 <h2>Engaging, high-quality educational experiences through classes, programs, and workshops focused on technology and creative fields</h2>
                 
+                <div class="hq-badge">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Headquartered in Georgia - Founded in GA</span>
+                </div>
+                
                 <div class="cta-buttons">
-                    <a href="#programs" class="btn btn-primary">
-                        <i class="fas fa-laptop-code"></i> Explore Programs
+                    <a href="https://rainfallsoftworks.com/services" class="btn btn-primary" target="_blank">
+                        <i class="fas fa-laptop-code"></i> Our Services
                     </a>
                     <a href="#contact" class="btn btn-secondary">
                         <i class="fas fa-envelope"></i> Contact Us
@@ -980,36 +1062,39 @@
             <div class="section-header">
                 <h2>Our Services</h2>
                 <p>We provide diverse educational experiences tailored to young learners</p>
+                <a href="https://rainfallsoftworks.com/services" class="btn btn-secondary" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> View All Services
+                </a>
             </div>
             
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-laptop-code"></i>
+                        <i class="fas fa-graduation-cap"></i>
                     </div>
-                    <h3>Tech Workshops</h3>
-                    <p>Hands-on workshops covering cutting-edge technologies and programming languages for young minds.</p>
+                    <h3>Structured Courses</h3>
+                    <p>In-depth learning programs designed to master specific technology topics through comprehensive curriculum.</p>
                     <ul class="service-features">
-                        <li>Age-appropriate coding activities</li>
-                        <li>Creative problem-solving challenges</li>
-                        <li>Game development fundamentals</li>
-                        <li>Robotics and electronics</li>
-                        <li>Digital art and design</li>
+                        <li>Progressive learning paths</li>
+                        <li>Expert-led instruction</li>
+                        <li>Project-based curriculum</li>
+                        <li>Skill certification</li>
+                        <li>Portfolio development</li>
                     </ul>
                 </div>
                 
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-graduation-cap"></i>
+                        <i class="fas fa-laptop-code"></i>
                     </div>
-                    <h3>Structured Courses</h3>
-                    <p>Comprehensive courses designed to build deep expertise in specific technology domains.</p>
+                    <h3>Tech Workshops</h3>
+                    <p>Hands-on sessions exploring cutting-edge technologies and programming concepts for all skill levels.</p>
                     <ul class="service-features">
-                        <li>Progressive learning paths</li>
-                        <li>Project-based curriculum</li>
-                        <li>Small class sizes</li>
-                        <li>Personalized feedback</li>
-                        <li>Portfolio development</li>
+                        <li>Interactive learning experiences</li>
+                        <li>Focus on practical skills</li>
+                        <li>Small group sessions</li>
+                        <li>Latest tools & technologies</li>
+                        <li>Creative problem-solving</li>
                     </ul>
                 </div>
                 
@@ -1018,12 +1103,12 @@
                         <i class="fas fa-campground"></i>
                     </div>
                     <h3>Summer Camps</h3>
-                    <p>Immersive week-long experiences that combine learning with fun activities.</p>
+                    <p>Immersive seasonal programs combining technology education with fun, collaborative activities.</p>
                     <ul class="service-features">
-                        <li>Themed tech adventures</li>
-                        <li>Collaborative projects</li>
-                        <li>Outdoor tech activities</li>
-                        <li>Showcase events for parents</li>
+                        <li>Themed technology adventures</li>
+                        <li>Full-day engaging programs</li>
+                        <li>Project showcases</li>
+                        <li>Team-building activities</li>
                         <li>Continued learning resources</li>
                     </ul>
                 </div>
@@ -1043,8 +1128,8 @@
                 <div class="about-text">
                     <h3>Who We Are</h3>
                     <p>Rainfall Softworks LLC is dedicated to creating engaging, high-quality educational experiences in technology, software development, and creative fields for young learners.</p>
-                    <p>Founded by educators and technology enthusiasts, we bridge the gap between theoretical knowledge and real-world application through hands-on learning experiences.</p>
-                    <p>Our programs are designed to inspire the next generation of creators, innovators, and problem-solvers.</p>
+                    <p>Founded in Georgia, we've grown from a small startup to a recognized educational provider with a passion for inspiring the next generation of creators.</p>
+                    <p>Our Georgia-based team brings together educators and technology experts to deliver exceptional learning experiences.</p>
                     
                     <div class="stats-grid">
                         <div class="stat-box">
@@ -1065,65 +1150,41 @@
                 <div class="about-image">
                     <i class="fas fa-users fa-3x"></i>
                     <div style="margin-top: 20px;">Inspiring Young Minds</div>
+                    <div class="ga-hq">
+                        <i class="fas fa-map-pin"></i> Headquarters: Georgia
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Programs Section -->
-    <section id="programs">
+    <!-- Tutorials Section -->
+    <section id="tutorials" class="tutorials-section">
         <div class="container">
             <div class="section-header">
-                <h2>Learning Programs</h2>
-                <p>Specialized educational experiences for young learners</p>
+                <h2>Online Tutorials</h2>
+                <p>Learn at your own pace with our video tutorials</p>
             </div>
             
-            <div class="programs-grid">
-                <div class="program-card">
-                    <div class="program-icon">
-                        <i class="fas fa-gamepad"></i>
+            <div class="tutorial-container">
+                <div class="tutorial-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/3JluqTojuME" title="Basic Computer Skills" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
-                    <h3>Game Development</h3>
-                    <p>Create your own video games while learning programming fundamentals and design principles.</p>
-                    <ul class="program-features">
-                        <li>Scratch for beginners</li>
-                        <li>Unity game engine</li>
-                        <li>Character design</li>
-                        <li>Story development</li>
-                        <li>Publishing basics</li>
-                    </ul>
-                </div>
-                
-                <div class="program-card">
-                    <div class="program-icon">
-                        <i class="fas fa-robot"></i>
+                    <div class="tutorial-content">
+                        <h3>Computer Basics: Keyboard & Mouse</h3>
+                        <p>Learn the fundamentals of using a keyboard and mouse with this beginner-friendly tutorial. Perfect for those just starting their tech journey.</p>
+                        <div class="tutorial-meta">
+                            <span><i class="fas fa-clock"></i> 12 min</span>
+                            <span><i class="fas fa-level-up-alt"></i> Beginner</span>
+                        </div>
                     </div>
-                    <h3>Robotics & AI</h3>
-                    <p>Build and program robots while exploring the fundamentals of artificial intelligence.</p>
-                    <ul class="program-features">
-                        <li>LEGO robotics kits</li>
-                        <li>Sensor programming</li>
-                        <li>Machine learning basics</li>
-                        <li>Problem-solving challenges</li>
-                        <li>Competition preparation</li>
-                    </ul>
-                </div>
-                
-                <div class="program-card">
-                    <div class="program-icon">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h3>Creative Coding</h3>
-                    <p>Combine art and technology to create interactive digital experiences and visual art.</p>
-                    <ul class="program-features">
-                        <li>Generative art</li>
-                        <li>Animation programming</li>
-                        <li>Digital storytelling</li>
-                        <li>Interactive installations</li>
-                        <li>Physical computing</li>
-                    </ul>
                 </div>
             </div>
+            
+            <a href="https://rainfallsoftworks.com/tutorials" class="btn btn-primary tutorial-btn" target="_blank">
+                <i class="fas fa-video"></i> Find More Tutorials
+            </a>
         </div>
     </section>
 
@@ -1136,100 +1197,29 @@
             </div>
             
             <div class="contact-container">
-                <div class="contact-info">
-                    <div class="contact-card">
-                        <h3>Get In Touch</h3>
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div class="details">
-                                <div class="label">Location</div>
-                                <div class="value">Downingtown, PA 19335</div>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <div class="details">
-                                <div class="label">Phone</div>
-                                <div class="value">484-667-1184</div>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div class="details">
-                                <div class="label">Email</div>
-                                <div class="value">rainfallsoftworks@gmail.com</div>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-clock"></i>
-                            <div class="details">
-                                <div class="label">Hours</div>
-                                <div class="value">Mon-Fri: 9AM - 6PM</div>
-                            </div>
+                <div class="contact-card">
+                    <h3>Get In Touch</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div class="details">
+                            <div class="label">Email</div>
+                            <div class="value">rainfallsoftworks@gmail.com</div>
                         </div>
                     </div>
-                    
-                    <div class="contact-card">
-                        <h3>Upcoming Events</h3>
-                        <div class="contact-item">
-                            <i class="fas fa-calendar-alt"></i>
-                            <div class="details">
-                                <div class="label">July 30, 2025</div>
-                                <div class="value">Intro to Game Design Workshop</div>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-calendar-alt"></i>
-                            <div class="details">
-                                <div class="label">August 12, 2025</div>
-                                <div class="value">Robotics Summer Camp</div>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-calendar-alt"></i>
-                            <div class="details">
-                                <div class="label">August 25, 2025</div>
-                                <div class="value">Creative Coding Showcase</div>
-                            </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div class="details">
+                            <div class="label">Phone (Georgia HQ)</div>
+                            <div class="value">678-824-4080</div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="contact-form">
-                    <h3>Send us a message</h3>
-                    <form>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="name">Full Name</label>
-                                <input type="text" id="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input type="email" id="email" required>
-                            </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="details">
+                            <div class="label">Headquarters</div>
+                            <div class="value">Atlanta, Georgia</div>
                         </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="interest">Interest</label>
-                            <select id="interest">
-                                <option>General Inquiry</option>
-                                <option>Workshop Registration</option>
-                                <option>Summer Camps</option>
-                                <option>After-School Programs</option>
-                                <option>Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">
-                            <i class="fas fa-paper-plane"></i> Send Message
-                        </button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1256,22 +1246,20 @@
                         <h4>Quick Links</h4>
                         <ul class="footer-links">
                             <li><a href="#home">Home</a></li>
-                            <li><a href="#services">Services</a></li>
+                            <li><a href="https://rainfallsoftworks.com/services" target="_blank">Services</a></li>
                             <li><a href="#about">About Us</a></li>
-                            <li><a href="#programs">Programs</a></li>
+                            <li><a href="#tutorials">Tutorials</a></li>
                             <li><a href="#contact">Contact</a></li>
                         </ul>
                     </div>
                     
                     <div class="footer-column">
-                        <h4>Programs</h4>
+                        <h4>Our Services</h4>
                         <ul class="footer-links">
-                            <li><a href="#">Game Development</a></li>
-                            <li><a href="#">Robotics & AI</a></li>
-                            <li><a href="#">Creative Coding</a></li>
-                            <li><a href="#">Web Design</a></li>
-                            <li><a href="#">Animation</a></li>
-                            <li><a href="#">Summer Camps</a></li>
+                            <li><a href="https://rainfallsoftworks.com/services" target="_blank">Structured Courses</a></li>
+                            <li><a href="https://rainfallsoftworks.com/services" target="_blank">Tech Workshops</a></li>
+                            <li><a href="https://rainfallsoftworks.com/services" target="_blank">Summer Camps</a></li>
+                            <li><a href="https://rainfallsoftworks.com/tutorials" target="_blank">Online Tutorials</a></li>
                         </ul>
                     </div>
                     
@@ -1280,11 +1268,11 @@
                         <div class="footer-contact-info">
                             <div class="footer-contact-item">
                                 <i class="fas fa-map-marker-alt"></i>
-                                <span>Downingtown, PA 19335</span>
+                                <span>Atlanta, Georgia</span>
                             </div>
                             <div class="footer-contact-item">
                                 <i class="fas fa-phone"></i>
-                                <span>484-667-1184</span>
+                                <span>678-824-4080 (GA)</span>
                             </div>
                             <div class="footer-contact-item">
                                 <i class="fas fa-envelope"></i>
@@ -1295,7 +1283,7 @@
                 </div>
                 
                 <div class="copyright">
-                    © 2025 Rainfall Softworks LLC. All rights reserved.
+                    © 2025 Rainfall Softworks LLC. All rights reserved. | Founded in Georgia
                 </div>
             </div>
         </div>
@@ -1326,30 +1314,90 @@
             }
         });
         
-        // Animate elements when they come into view
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
-                    observer.unobserve(entry.target);
-                }
+        // Animation observer
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll(
+                '.hero h1, .hero h2, .hero .hq-badge, .hero .cta-buttons, ' +
+                '.section-header h2, .section-header p, .section-header .btn, ' +
+                '.service-card, .about-text h3, .about-text p, .stat-box, ' +
+                '.about-image, .tutorials-section, .tutorial-card, ' +
+                '.tutorial-btn, .contact-container, footer'
+            );
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                        
+                        // Add special animations for specific elements
+                        if (entry.target.classList.contains('service-card')) {
+                            setTimeout(() => {
+                                entry.target.style.transform = 'scale(1)';
+                                entry.target.style.opacity = '1';
+                            }, 100);
+                        }
+                        
+                        if (entry.target.classList.contains('section-header')) {
+                            setTimeout(() => {
+                                entry.target.classList.add('animate-in');
+                            }, 300);
+                        }
+                        
+                        observer.unobserve(entry.target);
+                    } else {
+                        // Animate out when element leaves viewport
+                        if (entry.target.classList.contains('hero-content') || 
+                            entry.target.classList.contains('section-header')) {
+                            entry.target.classList.remove('animate-in');
+                        }
+                    }
+                });
+            }, { 
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
             });
-        }, { threshold: 0.1 });
+            
+            elements.forEach(el => {
+                observer.observe(el);
+            });
+        };
         
-        document.querySelectorAll('.service-card, .program-card').forEach(el => {
-            el.style.animationPlayState = 'paused';
-            observer.observe(el);
+        // Initialize animations when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            animateOnScroll();
+            
+            // Add hover effects to all interactive elements
+            document.querySelectorAll('.btn, .service-card, .contact-card, .footer-links a').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    el.style.transform = 'scale(1.05)';
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    el.style.transform = '';
+                });
+            });
         });
         
-        // Form submission
-        const contactForm = document.querySelector('.contact-form form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Thank you for your message! We will get back to you soon.');
-                this.reset();
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const hero = document.querySelector('.hero');
+            
+            if (hero) {
+                hero.style.backgroundPosition = `center ${scrollY * 0.5}px`;
+            }
+            
+            // Animate elements when scrolling in both directions
+            const animatedElements = document.querySelectorAll('.service-card, .stat-box');
+            animatedElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    el.classList.add('animate-in');
+                }
             });
-        }
+        });
     </script>
 </body>
 </html>
